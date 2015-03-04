@@ -3,7 +3,7 @@
 use Memcached;
 use RuntimeException;
 
-class MemcachedPlusConnector
+class Connector
 {
 
     /**

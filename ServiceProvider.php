@@ -2,7 +2,7 @@
 
 use Illuminate\Cache\CacheServiceProvider;
 
-class MemcachedPlusServiceProvider extends CacheServiceProvider
+class ServiceProvider extends CacheServiceProvider
 {
 
     /**
@@ -15,7 +15,7 @@ class MemcachedPlusServiceProvider extends CacheServiceProvider
         parent::register();
 
         $this->app->bindShared('cache', function ($app) {
-            return new MemcachedPlusCacheManager($app);
+            return new CacheManager($app);
         });
     }
 

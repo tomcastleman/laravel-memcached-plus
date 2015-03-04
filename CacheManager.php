@@ -1,9 +1,9 @@
 <?php namespace B3IT\MemcachedPlus;
 
 use Illuminate\Cache\MemcachedStore;
-use Illuminate\Cache\CacheManager;
+use Illuminate\Cache\CacheManager as IlluminateCacheManager;
 
-class MemcachedPlusCacheManager extends CacheManager
+class CacheManager extends IlluminateCacheManager
 {
 
     /**
@@ -26,7 +26,7 @@ class MemcachedPlusCacheManager extends CacheManager
 
         $useMemcachedPlus = ($persistentConnectionId || $customOptions || $saslCredentials);
         if ($useMemcachedPlus) {
-            $memcached = (new MemcachedPlusConnector())
+            $memcached = (new Connector())
                 ->connect($config['servers'], $persistentConnectionId, $customOptions, $saslCredentials);
         } else {
             $memcached = $this->app['memcached.connector']->connect($config['servers']);
