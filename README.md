@@ -74,7 +74,7 @@ These may be used in a store config like so:
 ],
 ```
 
-Note: as this package _extends_ the built-in Laravel 5 memcached Cache driver, the driver string remains `memcached`.
+Note: as this package _extends_ the built-in Laravel 5 memcached Cache driver the driver string remains `memcached`.
 
 ## Support
 
