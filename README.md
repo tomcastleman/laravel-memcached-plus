@@ -43,9 +43,9 @@ As of Laravel 5.0.14 this is on line 119.
 
 Once installed and activated the following extra configuration items are available for use with a memcached store in `config/cache.php`:
 
-* `persistent_id`
-* `sasl`
-* `options`
+* `persistent_id` - [`Memcached::__construct`] (http://php.net/manual/en/memcached.construct.php) explains how this is used
+* `sasl` - used by [`Memcached::setSaslAuthData`](http://php.net/manual/en/memcached.setsaslauthdata.php)
+* `options` - see [`Memcached::setOptions`](http://php.net/manual/en/memcached.setoptions.php)
 
 These may be used in a store config like so:
 
