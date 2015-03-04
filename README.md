@@ -9,13 +9,13 @@ Integrating with cloud memcached providers such as [Memcachier](https://www.memc
 Through extra cache configuration items this package _extends the built-in Laravel 5 Cache memcached driver_.
 If you don't use the extra configuration items, the built-in memcached driver will not be overridden.
 
-# Installation
+## Installation
 
 Available to install via composer, all you need to do is:
 
 `composer require b3it/laravel-memcached-plus`
 
-# Activation
+## Activation
 
 In your laravel application `app/config.php` you need to replace the built-in `Illuminate\Cache\CacheServiceProvider` with `B3IT\MemcachedPlus\ServiceProvider` provided by this package, like so:
 
@@ -30,7 +30,7 @@ In your laravel application `app/config.php` you need to replace the built-in `I
 
 As of Laravel 5.0.14 this is on line 119.
 
-# Configuration
+## Configuration
 
 Once installed and activated the following extra configuration items are available for use with a memcached store in `config/cache.php`:
 
@@ -67,7 +67,7 @@ These may be used in a store config like so:
 
 Note: as this package _extends_ the built-in Laravel 5 memcached Cache driver, the driver string remains `memcached`.
 
-# Support
+## Support
 
 Please do let me know if you have any comments or queries.
 
