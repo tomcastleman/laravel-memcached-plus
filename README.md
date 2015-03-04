@@ -9,11 +9,20 @@ Integrating with cloud memcached providers such as [Memcachier](https://www.memc
 Through extra cache configuration items this package _extends the built-in Laravel 5 Cache memcached driver_.
 If you don't use the extra configuration items, the built-in memcached driver will not be overridden.
 
+## Requirements
+
+* >= PHP 5.4 with [ext-memcached](http://php.net/manual/en/book.memcached.php)
+* To use [SASL](http://docs.php.net/manual/en/memcached.setsaslauthdata.php) it must be compiled with SASL support. This is the default on [Heroku](https://devcenter.heroku.com/articles/php-support)
+
 ## Installation
 
 Available to install via composer, all you need to do is:
 
 `composer require b3it/laravel-memcached-plus`
+
+If your local development environment does not meet the requirements you may do this instead:
+
+`composer require b3it/laravel-memcached-plus --ignore-platform-reqs`
 
 ## Activation
 
