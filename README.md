@@ -118,7 +118,7 @@ These may be used in a store config like so:
 When defining `options` you should set the config key to the `Memcached` constant name as a string.
 This avoids any issues with local environments missing ext-memcached and throwing a warning about
 undefined constants. The config keys are automatically resolved into `Memcached` constants by the
-`MemcachedPlus\Connector` which throws a `RuntimeException` if the constant is invalid.
+`MemcachedPlus\MemcachedConnector` which throws a `RuntimeException` if the constant is invalid.
 
 Note that as this package _enhances_ the built-in Laravel 5 memcached Cache driver the driver string
 remains `memcached`.
