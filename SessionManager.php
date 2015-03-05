@@ -11,7 +11,22 @@ class SessionManager extends IlluminateSessionManager
      */
     protected function createMemcachedDriver()
     {
-        dd('here');
-        return $this->createCacheBased('memcached');
+        $store = $this->app['config']['session.store'];
+
+        return $this->buildSession($this->createMemcachedHandler($store));
     }
+
+    /**
+     * Create the memcache based session handler instance.
+     *
+     * @param  string  $store
+     * @return \Illuminate\Session\CacheBasedSessionHandler
+     */
+    protected function createMemcachedHandler($store)
+    {
+        $minutes = $this->app['config']['session.lifetime'];
+
+        return new CacheBasedSessionHandler($this->app['cache']->store($store), $minutes);
+    }
+
 }
