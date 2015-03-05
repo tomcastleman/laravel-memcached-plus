@@ -110,7 +110,7 @@ This avoids any issues with local environments missing ext-memcached and throwin
 undefined constants. The config keys are automatically resolved into `Memcached` constants by the
 `MemcachedPlus\Connector` which throws a `RuntimeException` if the constant is invalid.
 
-Note: as this package _extends_ the built-in Laravel 5 memcached Cache driver the driver string
+Note that as this package _enhances_ the built-in Laravel 5 memcached Cache driver the driver string
 remains `memcached`.
 
 In case you are unfamiliar with how to use multiple cache stores in Laravel, you would access
