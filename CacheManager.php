@@ -26,7 +26,7 @@ class CacheManager extends IlluminateCacheManager
 
         $useMemcachedPlus = ($persistentConnectionId || $customOptions || $saslCredentials);
         if ($useMemcachedPlus) {
-            $memcached = (new Connector())
+            $memcached = (new MemcachedConnector())
                 ->connect($config['servers'], $persistentConnectionId, $customOptions, $saslCredentials);
         } else {
             $memcached = $this->app['memcached.connector']->connect($config['servers']);
