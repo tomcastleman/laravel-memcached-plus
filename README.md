@@ -1,6 +1,10 @@
 # laravel-memcached-plus
 
-Integrating with cloud memcached providers such as [Memcachier](https://www.memcachier.com/) and [memcached cloud](https://redislabs.com/memcached-cloud) can require memcached features not available with the built-in [Laravel 5 Cache](http://laravel.com/docs/5.0/cache) memcached driver. These include:
+Integrating with cloud memcached providers such as [Memcachier](https://www.memcachier.com/) and
+[memcached cloud](https://redislabs.com/memcached-cloud) can require memcached features not available
+with the built-in [Laravel 5 Cache](http://laravel.com/docs/5.0/cache) memcached driver.
+
+These include:
 
 * persistent connections
 * SASL authentication 
@@ -8,6 +12,8 @@ Integrating with cloud memcached providers such as [Memcachier](https://www.memc
 
 Through extra cache configuration items this package _extends the built-in Laravel 5 Cache memcached driver_.
 If you don't use the extra configuration items, the built-in memcached driver will not be overridden.
+
+Optionally, this package also allows these extra cache configuration items to be used for memcached Sessions.
 
 ## Requirements
 
@@ -40,7 +46,7 @@ from this package to the `providers` array:
      * Application Service Providers...
      */
      ...
-     
+
     'B3IT\MemcachedPlus\CacheServiceProvider',
     'B3IT\MemcachedPlus\SessionServiceProvider',
 ],
