@@ -24,24 +24,40 @@ If your local environment does not meet the requirements you may need to append 
 
 `composer require b3it/laravel-memcached-plus --ignore-platform-reqs`
 
-## Activation
+## Configuration
 
-In your laravel application `app/config.php` you need to replace the built-in `Illuminate\Cache\CacheServiceProvider` with `B3IT\MemcachedPlus\ServiceProvider` provided by this package, like so:
+### Providers
+
+Once installed you can use this package to enhance the Laravel Cache and Session services.
+
+In your laravel application configuration `app/config.php` you need to append the Service Providers
+from this package to the `providers` array:
 
 ```
 'providers' => [
     ...
-    //'Illuminate\Cache\CacheServiceProvider',
-    'B3IT\MemcachedPlus\ServiceProvider',
-    ...
+    /*
+     * Application Service Providers...
+     */
+     ...
+     
+    'B3IT\MemcachedPlus\CacheServiceProvider',
+    'B3IT\MemcachedPlus\SessionServiceProvider',
 ],
 ```
 
-As of Laravel 5.0.14 this is on line 119.
+As of Laravel 5.0.14 this is on line 148.
 
-## Configuration
+The `B3IT\MemcachedPlus\SessionServiceProvider` is optional. You only need to add this if:
 
-Once installed and activated the following extra configuration items are available for use with a memcached store in `config/cache.php`:
+* You want to specify the memcached store from the session config (see below), or
+* You want MemcachedPlus sessions!
+
+### Cache
+
+This section discusses the Laravel cache configuration file `config/cache.php`.
+
+This package makes the following extra configuration items are available for use with a memcached store:
 
 * `persistent_id` - [`Memcached::__construct`] (http://php.net/manual/en/memcached.construct.php) explains how this is used
 * `sasl` - used by [`Memcached::setSaslAuthData`](http://php.net/manual/en/memcached.setsaslauthdata.php)
@@ -80,6 +96,32 @@ constants. The config keys are automatically resolved into `Memcached` constants
 which throws a `RuntimeException` if the constant is invalid.
 
 Note: as this package _extends_ the built-in Laravel 5 memcached Cache driver the driver string remains `memcached`.
+
+### Session
+
+This section discusses the Laravel session configuration file `config/session.php`.
+
+If you are using memcached sessions you will have set the `driver` configuration item to 'memcached'.
+
+If you have added the `B3IT\MemcachedPlus\SessionServiceProvider` as discussed above, the `memcached_store`
+configuration item is available. This is explained in the following new snippet you can paste into
+your session configuration file:
+
+```
+    /*
+    |--------------------------------------------------------------------------
+    | Session Cache Store
+    |--------------------------------------------------------------------------
+    |
+    | When using the "memcached" session driver, you may specify a cache store
+    | that should be used for these sessions. This should correspond to a
+    | store in your cache configuration options which uses the memcached
+    | driver.
+    |
+    */
+
+    'memcached_store' => 'memcachier',
+```
 
 ## Support
 
