@@ -10,7 +10,7 @@ These include:
 * SASL authentication 
 * custom options
 
-Through extra cache configuration items this package _extends the built-in Laravel 5 Cache memcached driver_.
+Adding new cache configuration items this package _extends the built-in Laravel 5 Cache memcached driver_.
 If you don't use the extra configuration items, the built-in memcached driver will not be overridden.
 
 Optionally, this package also allows these extra cache configuration items to be used for memcached Sessions.
