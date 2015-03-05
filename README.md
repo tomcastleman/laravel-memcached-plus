@@ -113,6 +113,13 @@ undefined constants. The config keys are automatically resolved into `Memcached`
 Note: as this package _extends_ the built-in Laravel 5 memcached Cache driver the driver string
 remains `memcached`.
 
+In case you are unfamiliar with how to use multiple cache stores in Laravel, you would access
+this store from your application code like so:
+
+```
+$value = Cache::store('memcachedstorefoo')->get('key');
+```
+
 ### Session
 
 This section discusses the Laravel session configuration file `config/session.php`.
