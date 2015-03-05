@@ -16,7 +16,7 @@ If you don't use the extra configuration items, the built-in memcached driver wi
 
 ## Installation
 
-Available to install via composer, all you need to do is:
+Available to install as a Composer package on [Packagist](https://packagist.org/packages/b3it/laravel-memcached-plus), all you need to do is:
 
 `composer require b3it/laravel-memcached-plus`
 
