@@ -20,7 +20,7 @@ Available to install via composer, all you need to do is:
 
 `composer require b3it/laravel-memcached-plus`
 
-If your local development environment does not meet the requirements you may do this instead:
+If your local environment does not meet the requirements you may need to append the `ignore-platform-reqs` option:
 
 `composer require b3it/laravel-memcached-plus --ignore-platform-reqs`
 
