@@ -36,11 +36,15 @@ If your local environment does not meet the requirements you may need to append 
 
 ## Configuration
 
+Once installed you can use this package to enhance the Laravel
+[Cache](http://laravel.com/docs/5.0/cache) and [Session](http://laravel.com/docs/5.0/session)
+services.
+
 ### Providers
 
-Once installed you can use this package to enhance the Laravel Cache and Session services.
+This section discusses the Laravel application configuration file `app/config.php`.
 
-In your laravel application configuration `app/config.php` you need to append the Service Providers
+In your laravel application configuration you need to append the Service Providers
 from this package to the `providers` array:
 
 ```
@@ -56,12 +60,12 @@ from this package to the `providers` array:
 ],
 ```
 
-As of Laravel 5.0.14 this is on line 148.
+As of Laravel 5.0.14 this will likely be around line 148.
 
 The `B3IT\MemcachedPlus\SessionServiceProvider` is optional. You only need to add this if:
 
-* You want to specify the memcached store from the session config (see below), or
-* You want MemcachedPlus sessions!
+* You want to specify the memcached store to use for sessions, or
+* You want to use the memcached features provided by this package for sessions
 
 ### Cache
 
