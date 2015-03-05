@@ -1,6 +1,6 @@
 # laravel-memcached-plus
 
-Integrating with cloud memcached services such as [Memcachier](https://www.memcachier.com/) and
+Integrating with cloud memcached services such as [MemCachier](https://www.memcachier.com/) and
 [memcached cloud](https://redislabs.com/memcached-cloud) can require memcached features not available
 with the built-in [Laravel 5 Cache](http://laravel.com/docs/5.0/cache) memcached driver.
 
