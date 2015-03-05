@@ -9,7 +9,7 @@ class CacheManager extends IlluminateCacheManager
     /**
      * Create an instance of the Memcached cache driver.
      *
-     * If $config contains a 'Plus' feature use MemcachedPlusConnector
+     * If $config contains a 'Plus' feature use B3IT\MemcachedPlus\MemcachedConnector
      * otherwise use Laravel default $this->app['memcached.connector']
      *
      * @param  array $config
