@@ -10,23 +10,27 @@ These include:
 * SASL authentication 
 * custom options
 
-Adding new cache configuration items this package _extends the built-in Laravel 5 Cache memcached driver_.
+Adding new configuration items, this package _enhances_ the built-in Laravel 5 Cache memcached driver.
 If you don't use the extra configuration items, the built-in memcached driver will not be overridden.
 
-Optionally, this package also allows these extra cache configuration items to be used for memcached Sessions.
+Optionally, this package also allows these extra configuration items to be used for memcached
+Sessions.
 
 ## Requirements
 
 * >= PHP 5.4 with [ext-memcached](http://php.net/manual/en/book.memcached.php)
-* To use [SASL](http://docs.php.net/manual/en/memcached.setsaslauthdata.php) it must be compiled with SASL support. This is the default on [Heroku](https://devcenter.heroku.com/articles/php-support)
+* To use [SASL](http://docs.php.net/manual/en/memcached.setsaslauthdata.php) it must be compiled with
+SASL support. This is the default on [Heroku](https://devcenter.heroku.com/articles/php-support)
 
 ## Installation
 
-Available to install as a Composer package on [Packagist](https://packagist.org/packages/b3it/laravel-memcached-plus), all you need to do is:
+Available to install as a Composer package on
+[Packagist](https://packagist.org/packages/b3it/laravel-memcached-plus), all you need to do is:
 
 `composer require b3it/laravel-memcached-plus`
 
-If your local environment does not meet the requirements you may need to append the `ignore-platform-reqs` option:
+If your local environment does not meet the requirements you may need to append the
+`ignore-platform-reqs` option:
 
 `composer require b3it/laravel-memcached-plus --ignore-platform-reqs`
 
@@ -65,7 +69,8 @@ This section discusses the Laravel cache configuration file `config/cache.php`.
 
 This package makes the following extra configuration items are available for use with a memcached store:
 
-* `persistent_id` - [`Memcached::__construct`] (http://php.net/manual/en/memcached.construct.php) explains how this is used
+* `persistent_id` - [`Memcached::__construct`] (http://php.net/manual/en/memcached.construct.php)
+explains how this is used
 * `sasl` - used by [`Memcached::setSaslAuthData`](http://php.net/manual/en/memcached.setsaslauthdata.php)
 * `options` - see [`Memcached::setOptions`](http://php.net/manual/en/memcached.setoptions.php)
 
@@ -97,11 +102,12 @@ These may be used in a store config like so:
 ```
 
 When defining `options` you should set the config key to the `Memcached` constant name as a string.
-This avoids any issues with local environments missing ext-memcached and throwing a warning about undefined
-constants. The config keys are automatically resolved into `Memcached` constants by the `MemcachedPlus\Connector`
-which throws a `RuntimeException` if the constant is invalid.
+This avoids any issues with local environments missing ext-memcached and throwing a warning about
+undefined constants. The config keys are automatically resolved into `Memcached` constants by the
+`MemcachedPlus\Connector` which throws a `RuntimeException` if the constant is invalid.
 
-Note: as this package _extends_ the built-in Laravel 5 memcached Cache driver the driver string remains `memcached`.
+Note: as this package _extends_ the built-in Laravel 5 memcached Cache driver the driver string
+remains `memcached`.
 
 ### Session
 
@@ -109,9 +115,9 @@ This section discusses the Laravel session configuration file `config/session.ph
 
 If you are using memcached sessions you will have set the `driver` configuration item to 'memcached'.
 
-If you have added the `B3IT\MemcachedPlus\SessionServiceProvider` as discussed above, the `memcached_store`
-configuration item is available. This is explained in the following new snippet you can paste into
-your session configuration file:
+If you have added the `B3IT\MemcachedPlus\SessionServiceProvider` as discussed above, the
+`memcached_store` configuration item is available. This is explained in the following new snippet
+you can paste into your session configuration file:
 
 ```
     /*
