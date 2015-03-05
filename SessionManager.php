@@ -1,6 +1,7 @@
 <?php namespace B3IT\MemcachedPlus;
 
 use Illuminate\Session\SessionManager as IlluminateSessionManager;
+use Illuminate\Session\CacheBasedSessionHandler;
 
 class SessionManager extends IlluminateSessionManager
 {

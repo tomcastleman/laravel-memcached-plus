@@ -12,7 +12,8 @@
   "require": {
     "php": ">=5.4.0",
     "ext-memcached": "*",
-    "illuminate/cache": "5.*"
+    "illuminate/cache": "5.*",
+    "illuminate/session": "5.*"
   },
   "autoload": {
     "psr-4": {
