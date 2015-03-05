@@ -1,10 +1,13 @@
 <?php namespace B3IT\MemcachedPlus;
 
+use Illuminate\Cache\MemcachedStore;
 use Illuminate\Session\SessionManager as IlluminateSessionManager;
 use Illuminate\Session\CacheBasedSessionHandler;
+use RuntimeException;
 
 class SessionManager extends IlluminateSessionManager
 {
+
     /**
      * Create an instance of the Memcached session driver.
      *
@@ -12,22 +15,17 @@ class SessionManager extends IlluminateSessionManager
      */
     protected function createMemcachedDriver()
     {
-        $store = $this->app['config']['session.store'];
+        $store = $this->app['config']['session.memcached_store'];
 
-        return $this->buildSession($this->createMemcachedHandler($store));
-    }
+        // Verify store uses the memcached driver
+        $repository = $this->app['cache']->store($store);
+        if (!($repository->getStore() instanceof MemcachedStore)) {
+            throw new RuntimeException("session.memcached_store [{$store}] is not a memcached store.");
+        }
 
-    /**
-     * Create the memcache based session handler instance.
-     *
-     * @param  string  $store
-     * @return \Illuminate\Session\CacheBasedSessionHandler
-     */
-    protected function createMemcachedHandler($store)
-    {
         $minutes = $this->app['config']['session.lifetime'];
 
-        return new CacheBasedSessionHandler($this->app['cache']->store($store), $minutes);
+        return $this->buildSession(new CacheBasedSessionHandler($repository, $minutes));
     }
 
 }
