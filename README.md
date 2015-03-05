@@ -59,11 +59,11 @@ These may be used in a store config like so:
             env('MEMCACHIER_PASSWORD')
         ],
         'options'    => [
-            Memcached::OPT_NO_BLOCK         => true,
-            Memcached::OPT_AUTO_EJECT_HOSTS => true,
-            Memcached::OPT_CONNECT_TIMEOUT  => 2000,
-            Memcached::OPT_POLL_TIMEOUT     => 2000,
-            Memcached::OPT_RETRY_TIMEOUT    => 2,
+            'OPT_NO_BLOCK'         => true,
+            'OPT_AUTO_EJECT_HOSTS' => true,
+            'OPT_CONNECT_TIMEOUT'  => 2000,
+            'OPT_POLL_TIMEOUT'     => 2000,
+            'OPT_RETRY_TIMEOUT'    => 2,
         ],
         'servers' => [
             [
@@ -73,6 +73,11 @@ These may be used in a store config like so:
     ],
 ],
 ```
+
+When defining `options` you should set the config key to the `Memcached` constant name as a string.
+This avoids any issues with local environments missing ext-memcached and throwing a warning about undefined
+constants. The config keys are automatically resolved into `Memcached` constants by the `MemcachedPlus\Connector`
+which throws a `RuntimeException` if the constant is invalid.
 
 Note: as this package _extends_ the built-in Laravel 5 memcached Cache driver the driver string remains `memcached`.
 

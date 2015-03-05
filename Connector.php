@@ -21,9 +21,20 @@ class Connector
     {
         $memcached = $this->getMemcached($persistentConnectionId);
 
-        // Set custom options
+        // Validate and set custom options
         if (count($customOptions)) {
-            $memcached->setOptions($customOptions);
+            $memcachedConstants = array_map(
+                function ($option) {
+                    $constant = "Memcached::{$option}";
+                    if (!defined($constant)) {
+                        throw new RuntimeException("Invalid Memcached option: [{$constant}]");
+                    }
+
+                    return constant($constant);
+                },
+                array_keys($customOptions)
+            );
+            $memcached->setOptions(array_combine($memcachedConstants, $customOptions));
         }
 
         // Set SASL auth data
