@@ -1,8 +1,8 @@
 <?php namespace B3IT\MemcachedPlus;
 
-use Illuminate\Cache\CacheServiceProvider;
+use Illuminate\Cache\CacheServiceProvider as IlluminateCacheServiceProvider;
 
-class ServiceProvider extends CacheServiceProvider
+class CacheServiceProvider extends IlluminateCacheServiceProvider
 {
 
     /**
