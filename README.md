@@ -44,12 +44,22 @@ services.
 
 This section discusses the Laravel application configuration file `app/config.php`.
 
-In your laravel application configuration you need to append the Service Providers
-from this package to the `providers` array:
+In the `providers` array you need to replace following built-in Service Providers:
+
+ * `Illuminate\Cache\CacheServiceProvider` and (optionally)
+ * `Illuminate\Session\SessionServiceProvider`
+
+A recommended approach is to comment out the built-in providers and append the
+Service Providers from this package:
 
 ```
 'providers' => [
     ...
+    //'Illuminate\Cache\CacheServiceProvider',
+    ...
+    //'Illuminate\Session\SessionServiceProvider',
+    ...
+
     /*
      * Application Service Providers...
      */
@@ -60,7 +70,7 @@ from this package to the `providers` array:
 ],
 ```
 
-As of Laravel 5.0.14 this will likely be around line 148.
+On a fresh install of Laravel 5.0.14 the providers array is on line 111 of `app/config.php`.
 
 The `B3IT\MemcachedPlus\SessionServiceProvider` is optional. You only need to add this if:
 
