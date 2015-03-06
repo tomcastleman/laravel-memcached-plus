@@ -11,9 +11,11 @@ These include:
 * custom options
 
 Adding 3 new configuration items, this package _enhances_ the built-in Laravel 5 Cache memcached driver.
-
 Optionally, this package also allows these extra configuration items to be used for memcached
 Sessions.
+
+Read on for detailed instructions - you may find it useful to reference the
+[demo app](https://github.com/b3it/laravel-memcached-plus-app) at the same time.
 
 ## Requirements
 
