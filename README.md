@@ -70,7 +70,7 @@ Service Providers from this package:
 ],
 ```
 
-On a fresh install of Laravel 5.0.14 the providers array is on line 111 of `app/config.php`.
+On a fresh install of Laravel 5.0.13 the providers array is on line 111 of `app/config.php`.
 
 The `B3IT\MemcachedPlus\SessionServiceProvider` is optional. You only need to add this if:
 
