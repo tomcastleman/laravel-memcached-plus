@@ -9,9 +9,6 @@ class CacheManager extends IlluminateCacheManager
     /**
      * Create an instance of the Memcached cache driver.
      *
-     * If $config contains a 'Plus' feature use B3IT\MemcachedPlus\MemcachedConnector
-     * otherwise use Laravel default $this->app['memcached.connector']
-     *
      * @param  array $config
      * @return \Illuminate\Cache\MemcachedStore
      */
@@ -24,13 +21,12 @@ class CacheManager extends IlluminateCacheManager
         $customOptions = array_get($config, 'options', []);
         $saslCredentials = array_filter(array_get($config, 'sasl', []));
 
-        $useMemcachedPlus = ($persistentConnectionId || $customOptions || $saslCredentials);
-        if ($useMemcachedPlus) {
-            $memcached = (new MemcachedConnector())
-                ->connect($config['servers'], $persistentConnectionId, $customOptions, $saslCredentials);
-        } else {
-            $memcached = $this->app['memcached.connector']->connect($config['servers']);
-        }
+        $memcached = $this->app['memcached.connector']->connect(
+            $config['servers'],
+            $persistentConnectionId,
+            $customOptions,
+            $saslCredentials
+        );
 
         return $this->repository(new MemcachedStore($memcached, $prefix));
     }

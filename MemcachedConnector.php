@@ -17,7 +17,7 @@ class MemcachedConnector
      *
      * @throws \RuntimeException
      */
-    public function connect(array $servers, $persistentConnectionId, array $customOptions, array $saslCredentials)
+    public function connect(array $servers, $persistentConnectionId = false, array $customOptions = [], array $saslCredentials = [])
     {
         $memcached = $this->getMemcached($persistentConnectionId);
 

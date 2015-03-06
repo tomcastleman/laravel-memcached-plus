@@ -17,6 +17,10 @@ class CacheServiceProvider extends IlluminateCacheServiceProvider
         $this->app->bindShared('cache', function ($app) {
             return new CacheManager($app);
         });
+
+        $this->app->bindShared('memcached.connector', function () {
+            return new MemcachedConnector;
+        });
     }
 
 }
