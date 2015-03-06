@@ -17,8 +17,12 @@ class MemcachedConnector
      *
      * @throws \RuntimeException
      */
-    public function connect(array $servers, $persistentConnectionId = false, array $customOptions = [], array $saslCredentials = [])
-    {
+    public function connect(
+        array $servers,
+        $persistentConnectionId = false,
+        array $customOptions = [],
+        array $saslCredentials = []
+    ) {
         $memcached = $this->getMemcached($persistentConnectionId);
 
         // Validate and set custom options
@@ -44,13 +48,15 @@ class MemcachedConnector
             $memcached->setSaslAuthData($username, $password);
         }
 
-        // For each server in the array, we'll just extract the configuration and add
-        // the server to the Memcached connection. Once we have added all of these
-        // servers we'll verify the connection is successful and return it back.
-        foreach ($servers as $server) {
-            $memcached->addServer(
-                $server['host'], $server['port'], $server['weight']
-            );
+        // Only add servers if we need to. If using a persistent connection
+        // the servers must only be added the first time otherwise connections
+        // are duplicated.
+        if (!$memcached->getServerList()) {
+            foreach ($servers as $server) {
+                $memcached->addServer(
+                    $server['host'], $server['port'], $server['weight']
+                );
+            }
         }
 
         $memcachedStatus = $memcached->getVersion();
