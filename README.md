@@ -155,6 +155,11 @@ you can paste into your session configuration file:
     'memcached_store' => 'memcachier',
 ```
 
+## laravel-memcached-plus in action
+
+I created a [demo app](https://github.com/b3it/laravel-memcached-plus-app) for you to see
+how this package integrates with Laravel 5 and how you could run it on Heroku.
+
 ## Support
 
 Please do let me know if you have any comments or queries.
