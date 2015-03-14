@@ -1,6 +1,8 @@
 # laravel-memcached-plus
 
-_Update_: I have submitted 2 PRs to [laravel/framework](https://github.com/laravel/framework) to integrate this package in to Laravel, [#7987 to add the Memcached features](https://github.com/laravel/framework/pull/7987) and [#7988 for the Session enhancement](https://github.com/laravel/framework/pull/7988).
+_Update_: I have submitted 2 PRs to [laravel/framework](https://github.com/laravel/framework) to integrate this package in to Laravel:
+* Memcached persistent connections, SASL authentication and custom options: [#7987](https://github.com/laravel/framework/pull/7987) and
+* Memcached Session store configuration [#7988](https://github.com/laravel/framework/pull/7988)
 
 Integrating with cloud memcached services such as [MemCachier](https://www.memcachier.com/) and
 [memcached cloud](https://redislabs.com/memcached-cloud) can require memcached features not available
