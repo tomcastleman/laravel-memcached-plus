@@ -4,6 +4,8 @@ _Update_: I have submitted 2 PRs to [laravel/framework](https://github.com/larav
 * Memcached persistent connections, SASL authentication and custom options: [#7987](https://github.com/laravel/framework/pull/7987) and
 * Memcached Session store configuration [#7988](https://github.com/laravel/framework/pull/7988)
 
+## Summary
+
 Integrating with cloud memcached services such as [MemCachier](https://www.memcachier.com/) and
 [memcached cloud](https://redislabs.com/memcached-cloud) can require memcached features not available
 with the built-in [Laravel 5 Cache](http://laravel.com/docs/5.0/cache) memcached driver.
