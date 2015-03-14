@@ -1,5 +1,7 @@
 # laravel-memcached-plus
 
+_Update_: I have submitted 2 PRs to [laravel/framework](https://github.com/laravel/framework) to integrate this package in to Laravel, [#7987 to add the Memcached features](https://github.com/laravel/framework/pull/7987) and [#7988 for the Session enhancement](https://github.com/laravel/framework/pull/7988).
+
 Integrating with cloud memcached services such as [MemCachier](https://www.memcachier.com/) and
 [memcached cloud](https://redislabs.com/memcached-cloud) can require memcached features not available
 with the built-in [Laravel 5 Cache](http://laravel.com/docs/5.0/cache) memcached driver.
