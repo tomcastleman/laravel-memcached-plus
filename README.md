@@ -1,9 +1,5 @@
 # laravel-memcached-plus
 
-_Update_: I have submitted 2 PRs to [laravel/framework](https://github.com/laravel/framework) to integrate this package in to Laravel:
-* Memcached persistent connections, SASL authentication and custom options: [#7987](https://github.com/laravel/framework/pull/7987) and
-* Memcached Session store configuration [#7988](https://github.com/laravel/framework/pull/7988)
-
 ## Summary
 
 Integrating with cloud memcached services such as [MemCachier](https://www.memcachier.com/) and
@@ -22,6 +18,8 @@ Sessions.
 
 Read on for detailed instructions - you may find it useful to reference the
 [demo app](https://github.com/b3it/laravel-memcached-plus-app) at the same time.
+
+__Update__: [see here](#user-content-integration-with-laravelframework) for details on the PRs I submitted to laravel/framework.
 
 ## Requirements
 
@@ -167,6 +165,15 @@ you can paste into your session configuration file:
 
 I created a [demo app](https://github.com/b3it/laravel-memcached-plus-app) for you to see
 how this package integrates with Laravel 5 and how you could run it on Heroku.
+
+
+## Integration with laravel/framework
+
+I submitted 2 PRs to [laravel/framework](https://github.com/laravel/framework) to integrate this package in to the framework itself:
+* Memcached persistent connections, SASL authentication and custom options: [#7987](https://github.com/laravel/framework/pull/7987) and
+* Memcached Session store configuration [#7988](https://github.com/laravel/framework/pull/7988)
+
+However @taylorotwell closed them due to lack of tests. When time permits I'm planning to add tests and re-submit, but in the meantime if anyone wishes to contribute them please submit a PR.
 
 ## Support
 
