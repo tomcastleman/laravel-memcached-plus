@@ -8,9 +8,9 @@ with the built-in [Laravel 5 Cache](http://laravel.com/docs/5.0/cache) memcached
 
 These include:
 
-* persistent connections
 * SASL authentication 
 * custom options
+* persistent connections
 
 Adding 3 new configuration items, this package _enhances_ the built-in Laravel 5 Cache memcached driver.
 Optionally, this package also allows these extra configuration items to be used for memcached
