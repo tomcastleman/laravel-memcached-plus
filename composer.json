@@ -19,5 +19,9 @@
     "psr-4": {
       "B3IT\\MemcachedPlus\\": "src/"
     }
+  },
+  "require-dev": {
+    "mockery/mockery": "0.9.*",
+    "phpunit/phpunit": "^5.1"
   }
 }
