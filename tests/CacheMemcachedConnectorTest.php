@@ -4,7 +4,6 @@ use Mockery as m;
 
 class CacheMemcachedConnectorTest extends PHPUnit_Framework_TestCase
 {
-
     public function tearDown()
     {
         m::close();
@@ -44,7 +43,6 @@ class CacheMemcachedConnectorTest extends PHPUnit_Framework_TestCase
 
         $memcached = $this->memcachedMockWithAddServer();
         $connector = $this->connectorMock();
-
 
         $connector->expects($this->once())
             ->method('getMemcached')
@@ -169,5 +167,4 @@ class CacheMemcachedConnectorTest extends PHPUnit_Framework_TestCase
     {
         return 100;
     }
-
 }

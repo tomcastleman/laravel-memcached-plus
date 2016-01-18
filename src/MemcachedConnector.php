@@ -1,21 +1,23 @@
-<?php namespace B3IT\MemcachedPlus;
+<?php
+
+namespace B3IT\MemcachedPlus;
 
 use Memcached;
 use RuntimeException;
 
 class MemcachedConnector
 {
-
     /**
      * Create a new Memcached connection.
      *
-     * @param  array $servers
-     * @param  string $persistentConnectionId
-     * @param  array $customOptions
-     * @param  array $saslCredentials
-     * @return \Memcached
+     * @param array  $servers
+     * @param string $persistentConnectionId
+     * @param array  $customOptions
+     * @param array  $saslCredentials
      *
      * @throws \RuntimeException
+     *
+     * @return \Memcached
      */
     public function connect(
         array $servers,
@@ -61,10 +63,10 @@ class MemcachedConnector
 
         $memcachedStatus = $memcached->getVersion();
         if (!is_array($memcachedStatus)) {
-            throw new RuntimeException("No Memcached servers added.");
+            throw new RuntimeException('No Memcached servers added.');
         }
         if (in_array('255.255.255', $memcachedStatus) && count(array_unique($memcachedStatus)) === 1) {
-            throw new RuntimeException("Could not establish Memcached connection.");
+            throw new RuntimeException('Could not establish Memcached connection.');
         }
 
         return $memcached;
@@ -81,7 +83,6 @@ class MemcachedConnector
             return new Memcached($persistentConnectionId);
         }
 
-        return new Memcached;
+        return new Memcached();
     }
-
 }

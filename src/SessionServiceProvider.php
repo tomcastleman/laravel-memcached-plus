@@ -1,19 +1,19 @@
-<?php namespace B3IT\MemcachedPlus;
+<?php
+
+namespace B3IT\MemcachedPlus;
 
 use Illuminate\Session\SessionServiceProvider as IlluminateSessionServiceProvider;
 
 class SessionServiceProvider extends IlluminateSessionServiceProvider
 {
-
     /**
-     * Replace \Illuminate\Session\CacheManager with B3IT\CacheManager
+     * Replace \Illuminate\Session\CacheManager with B3IT\CacheManager.
      *
      * @return void
      */
     public function register()
     {
         parent::register();
-
     }
 
     /**
@@ -23,10 +23,8 @@ class SessionServiceProvider extends IlluminateSessionServiceProvider
      */
     protected function registerSessionManager()
     {
-        $this->app->singleton('session', function($app)
-        {
+        $this->app->singleton('session', function ($app) {
             return new SessionManager($app);
         });
     }
-
 }
