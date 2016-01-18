@@ -1,4 +1,5 @@
 # laravel-memcached-plus
+[![StyleCI](https://styleci.io/repos/31662516/shield?style=flat)](https://styleci.io/repos/31662516)
 [![Build Status](https://travis-ci.org/b3it/laravel-memcached-plus.svg?branch=master)](https://travis-ci.org/b3it/laravel-memcached-plus)
 [![Total Downloads](https://poser.pugx.org/b3it/laravel-memcached-plus/downloads)](https://packagist.org/packages/b3it/laravel-memcached-plus)
 [![Latest Stable Version](https://poser.pugx.org/b3it/laravel-memcached-plus/v/stable)](https://packagist.org/packages/b3it/laravel-memcached-plus)
