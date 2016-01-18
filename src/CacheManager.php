@@ -1,15 +1,17 @@
-<?php namespace B3IT\MemcachedPlus;
+<?php
 
-use Illuminate\Cache\MemcachedStore;
+namespace B3IT\MemcachedPlus;
+
 use Illuminate\Cache\CacheManager as IlluminateCacheManager;
+use Illuminate\Cache\MemcachedStore;
 
 class CacheManager extends IlluminateCacheManager
 {
-
     /**
      * Create an instance of the Memcached cache driver.
      *
-     * @param  array $config
+     * @param array $config
+     *
      * @return \Illuminate\Cache\MemcachedStore
      */
     protected function createMemcachedDriver(array $config)

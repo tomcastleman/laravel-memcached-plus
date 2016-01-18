@@ -1,13 +1,14 @@
-<?php namespace B3IT\MemcachedPlus;
+<?php
+
+namespace B3IT\MemcachedPlus;
 
 use Illuminate\Cache\MemcachedStore;
-use Illuminate\Session\SessionManager as IlluminateSessionManager;
 use Illuminate\Session\CacheBasedSessionHandler;
+use Illuminate\Session\SessionManager as IlluminateSessionManager;
 use RuntimeException;
 
 class SessionManager extends IlluminateSessionManager
 {
-
     /**
      * Create an instance of the Memcached session driver.
      *
@@ -27,5 +28,4 @@ class SessionManager extends IlluminateSessionManager
 
         return $this->buildSession(new CacheBasedSessionHandler($repository, $minutes));
     }
-
 }

@@ -1,12 +1,13 @@
-<?php namespace B3IT\MemcachedPlus;
+<?php
+
+namespace B3IT\MemcachedPlus;
 
 use Illuminate\Cache\CacheServiceProvider as IlluminateCacheServiceProvider;
 
 class CacheServiceProvider extends IlluminateCacheServiceProvider
 {
-
     /**
-     * Replace \Illuminate\Cache\CacheManager with B3IT\CacheManager
+     * Replace \Illuminate\Cache\CacheManager with B3IT\CacheManager.
      *
      * @return void
      */
@@ -19,8 +20,7 @@ class CacheServiceProvider extends IlluminateCacheServiceProvider
         });
 
         $this->app->singleton('memcached.connector', function () {
-            return new MemcachedConnector;
+            return new MemcachedConnector();
         });
     }
-
 }
