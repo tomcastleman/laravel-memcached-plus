@@ -7,9 +7,12 @@ php:
   - hhvm
   - nightly
 
+before_script: phpenv config-add php.ini
+
 before_install:
   - composer self-update
   - composer validate
 
 install:
   - travis_retry composer install --prefer-dist
+
