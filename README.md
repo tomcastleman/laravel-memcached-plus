@@ -1,4 +1,5 @@
 # laravel-memcached-plus
+[![Build Status](https://travis-ci.org/b3it/laravel-memcached-plus.svg?branch=master)](https://travis-ci.org/b3it/laravel-memcached-plus)
 
 ## Summary
 
@@ -173,7 +174,7 @@ I submitted 2 PRs to [laravel/framework](https://github.com/laravel/framework) t
 * Memcached persistent connections, SASL authentication and custom options: [#7987](https://github.com/laravel/framework/pull/7987) and
 * Memcached Session store configuration [#7988](https://github.com/laravel/framework/pull/7988)
 
-However @taylorotwell closed them due to lack of tests. When time permits I'm planning to add tests and re-submit, but in the meantime if anyone wishes to contribute them please submit a PR.
+However @taylorotwell closed them due to lack of tests. Tests have recently been added (Jan 2016) and I plan to submit PRs to the framework in due course.
 
 ## Support
 
