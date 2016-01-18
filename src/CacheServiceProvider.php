@@ -14,11 +14,11 @@ class CacheServiceProvider extends IlluminateCacheServiceProvider
     {
         parent::register();
 
-        $this->app->bindShared('cache', function ($app) {
+        $this->app->singleton('cache', function ($app) {
             return new CacheManager($app);
         });
 
-        $this->app->bindShared('memcached.connector', function () {
+        $this->app->singleton('memcached.connector', function () {
             return new MemcachedConnector;
         });
     }
