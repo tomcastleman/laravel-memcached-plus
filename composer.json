@@ -17,7 +17,7 @@
   },
   "autoload": {
     "psr-4": {
-      "B3IT\\MemcachedPlus\\": ""
+      "B3IT\\MemcachedPlus\\": "src/"
     }
   },
   "minimum-stability": "dev"
