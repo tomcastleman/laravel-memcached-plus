@@ -56,8 +56,8 @@ This section discusses the Laravel application configuration file `app/config.ph
 
 In the `providers` array you need to replace following built-in Service Providers:
 
- * `Illuminate\Cache\CacheServiceProvider` and (optionally)
- * `Illuminate\Session\SessionServiceProvider`
+ * `Illuminate\Cache\CacheServiceProvider` and
+ * `Illuminate\Session\SessionServiceProvider` (optional)
 
 A recommended approach is to comment out the built-in providers and append the
 Service Providers from this package:
@@ -76,11 +76,9 @@ Service Providers from this package:
      ...
 
     'B3IT\MemcachedPlus\CacheServiceProvider',
-    'B3IT\MemcachedPlus\SessionServiceProvider',
+    'B3IT\MemcachedPlus\SessionServiceProvider', // optional
 ],
 ```
-
-On a fresh install of Laravel 5.0.13 the providers array is on line 111 of `app/config.php`.
 
 The `B3IT\MemcachedPlus\SessionServiceProvider` is optional. You only need to add this if:
 
@@ -91,7 +89,7 @@ The `B3IT\MemcachedPlus\SessionServiceProvider` is optional. You only need to ad
 
 This section discusses the Laravel cache configuration file `config/cache.php`.
 
-This package makes the following extra configuration items are available for use with a memcached store:
+This package makes the following extra configuration items available for use with a memcached store:
 
 * `persistent_id` - [`Memcached::__construct`] (http://php.net/manual/en/memcached.construct.php)
 explains how this is used
@@ -127,10 +125,10 @@ These may be used in a store config like so:
 
 When defining `options` you should set the config key to the `Memcached` constant name as a string.
 This avoids any issues with local environments missing ext-memcached and throwing a warning about
-undefined constants. The config keys are automatically resolved into `Memcached` constants by the
+undefined constants. The `options` config keys are automatically resolved into `Memcached` constants by the
 `MemcachedPlus\MemcachedConnector` which throws a `RuntimeException` if the constant is invalid.
 
-Note that as this package _enhances_ the built-in Laravel 5 memcached Cache driver the driver string
+Note that as this package _enhances_ the built-in Laravel 5 memcached Cache driver, the driver string
 remains `memcached`.
 
 In case you are unfamiliar with how to use multiple cache stores in Laravel, you would access
@@ -174,11 +172,12 @@ how this package integrates with Laravel 5 and how you could run it on Heroku.
 
 ## Integration with laravel/framework
 
-I submitted 2 PRs to [laravel/framework](https://github.com/laravel/framework) to integrate this package in to the framework itself:
+I submitted 2 PRs to [laravel/framework](https://github.com/laravel/framework) to natively integrate the functonality of this package in v5.0:
+
 * Memcached persistent connections, SASL authentication and custom options: [#7987](https://github.com/laravel/framework/pull/7987) and
 * Memcached Session store configuration [#7988](https://github.com/laravel/framework/pull/7988)
 
-However @taylorotwell closed them due to lack of tests. Tests have recently been added (Jan 2016) and I plan to submit PRs to the framework in due course.
+The PRs weren't accepted at the time due to lack of tests in the initial version. As at Jan 2016 [tests](https://github.com/b3it/laravel-memcached-plus/blob/f259b39985e01ea75d6c5e1b3b633f8d9252ee17/tests/CacheMemcachedConnectorTest.php) have been added and I plan to submit PRs to the framework in due course.
 
 ## Support
 
