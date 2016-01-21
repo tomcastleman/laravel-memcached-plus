@@ -4,6 +4,7 @@ use Mockery as m;
 
 class CacheMemcachedConnectorTest extends PHPUnit_Framework_TestCase
 {
+
     public function tearDown()
     {
         m::close();
@@ -29,6 +30,7 @@ class CacheMemcachedConnectorTest extends PHPUnit_Framework_TestCase
     public function testExceptionThrownOnBadConnection()
     {
         $memcached = $this->memcachedMockWithAddServer(['255.255.255']);
+
         $connector = $this->connectorMock();
         $connector->expects($this->once())
             ->method('getMemcached')
@@ -42,8 +44,8 @@ class CacheMemcachedConnectorTest extends PHPUnit_Framework_TestCase
         $persistentConnectionId = 'persistent_connection_id';
 
         $memcached = $this->memcachedMockWithAddServer();
-        $connector = $this->connectorMock();
 
+        $connector = $this->connectorMock();
         $connector->expects($this->once())
             ->method('getMemcached')
             ->with($persistentConnectionId)
@@ -66,11 +68,7 @@ class CacheMemcachedConnectorTest extends PHPUnit_Framework_TestCase
             ->method('getMemcached')
             ->will($this->returnValue($memcached));
 
-        $result = $connector->connect(
-            [['host' => 'localhost', 'port' => 11211, 'weight' => 100]],
-            false,
-            $validOptions
-        );
+        $result = $this->connect($connector, false, $validOptions);
 
         $this->assertSame($result, $memcached);
     }
@@ -89,11 +87,7 @@ class CacheMemcachedConnectorTest extends PHPUnit_Framework_TestCase
             ->method('getMemcached')
             ->will($this->returnValue($memcached));
 
-        $connector->connect(
-            [['host' => 'localhost', 'port' => 11211, 'weight' => 100]],
-            false,
-            $invalidOptions
-        );
+        $this->connect($connector, false, $invalidOptions);
     }
 
     public function testServersAreAddedCorrectlyWithSaslCredentials()
@@ -109,12 +103,7 @@ class CacheMemcachedConnectorTest extends PHPUnit_Framework_TestCase
         $connector = $this->connectorMock();
         $connector->expects($this->once())->method('getMemcached')->will($this->returnValue($memcached));
 
-        $result = $connector->connect(
-            [['host' => 'localhost', 'port' => 11211, 'weight' => 100]],
-            false,
-            [],
-            $saslCredentials
-        );
+        $result = $this->connect($connector, false, [], $saslCredentials);
 
         $this->assertSame($result, $memcached);
     }
