@@ -4,7 +4,6 @@ use Mockery as m;
 
 class CacheMemcachedConnectorTest extends PHPUnit_Framework_TestCase
 {
-
     public function tearDown()
     {
         m::close();
