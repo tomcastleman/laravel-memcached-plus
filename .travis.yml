@@ -9,7 +9,7 @@ php:
 
 before_install:
   - phpenv config-rm xdebug.ini
-  - phpenv config-add php-test.ini
+  - phpenv config-add .php.ini
   - composer self-update
   - composer validate
 
