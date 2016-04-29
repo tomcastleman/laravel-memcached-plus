@@ -57,7 +57,11 @@ class CacheMemcachedConnectorTest extends PHPUnit_Framework_TestCase
 
     public function testServersAreAddedCorrectlyWithValidOptions()
     {
-        $validOptions = ['OPT_NO_BLOCK' => true, 'OPT_AUTO_EJECT_HOSTS' => true];
+        if (! class_exists('Memcached')) {
+            $this->markTestSkipped('Memcached module not installed');
+        }
+
+        $validOptions = ['OPT_NO_BLOCK' => true, 'OPT_CONNECT_TIMEOUT' => 2000];
 
         $memcached = $this->memcachedMockWithAddServer();
         $memcached->shouldReceive('setOptions')->once()->andReturn(true);
@@ -77,7 +81,11 @@ class CacheMemcachedConnectorTest extends PHPUnit_Framework_TestCase
      */
     public function testExceptionThrownWithInvalidOptions()
     {
-        $invalidOptions = ['OPT_NO_BLOC' => true, 'OPT_AUTO_EJECT_HOST' => true];
+        if (! class_exists('Memcached')) {
+            $this->markTestSkipped('Memcached module not installed');
+        }
+
+        $invalidOptions = ['OPT_NO_BLOC' => true, 'OPT_CONNECT_TIMEOUT' => 2000];
 
         $memcached = m::mock('stdClass');
 
@@ -91,6 +99,10 @@ class CacheMemcachedConnectorTest extends PHPUnit_Framework_TestCase
 
     public function testServersAreAddedCorrectlyWithSaslCredentials()
     {
+        if (! class_exists('Memcached')) {
+            $this->markTestSkipped('Memcached module not installed');
+        }
+
         $saslCredentials = ['foo', 'bar'];
 
         $memcached = $this->memcachedMockWithAddServer();
