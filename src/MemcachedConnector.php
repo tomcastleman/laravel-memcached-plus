@@ -10,10 +10,10 @@ class MemcachedConnector
     /**
      * Create a new Memcached connection.
      *
-     * @param  array  $servers
+     * @param array       $servers
      * @param string|null $persistentConnectionId
-     * @param array $customOptions
-     * @param array $saslCredentials
+     * @param array       $customOptions
+     * @param array       $saslCredentials
      *
      * @throws \RuntimeException
      *
@@ -40,7 +40,7 @@ class MemcachedConnector
 
         // Add servers if necessary. When using a persistent connection servers
         // must only be added once otherwise connections are duplicated.
-        if (! $memcached->getServerList()) {
+        if (!$memcached->getServerList()) {
             foreach ($servers as $server) {
                 $memcached->addServer(
                     $server['host'], $server['port'], $server['weight']
@@ -50,7 +50,7 @@ class MemcachedConnector
 
         $memcachedStatus = $memcached->getVersion();
 
-        if (! is_array($memcachedStatus)) {
+        if (!is_array($memcachedStatus)) {
             throw new RuntimeException('No Memcached servers added.');
         }
 
@@ -65,6 +65,7 @@ class MemcachedConnector
      * Get a new Memcached instance.
      *
      * @param string|null $persistentConnectionId
+     *
      * @return \Memcached
      */
     protected function getMemcached($persistentConnectionId)
@@ -91,7 +92,7 @@ class MemcachedConnector
         $memcachedConstants = array_map(
             function ($option) {
                 $constant = "Memcached::{$option}";
-                if (! defined($constant)) {
+                if (!defined($constant)) {
                     throw new RuntimeException("Invalid Memcached option: [{$constant}]");
                 }
 
