@@ -10,37 +10,27 @@ class MemcachedConnector
     /**
      * Create a new Memcached connection.
      *
-     * @param array       $servers
-     * @param string|null $persistentConnectionId
-     * @param array       $customOptions
-     * @param array       $saslCredentials
+     * @param  array  $servers
+     * @param string|null $connectionId
+     * @param array $options
+     * @param array $credentials
      *
      * @throws \RuntimeException
      *
      * @return \Memcached
      */
     public function connect(
-        array $servers,
-        $persistentConnectionId = null,
-        array $customOptions = [],
-        array $saslCredentials = []
+        array $servers, $connectionId = null,
+        array $options = [], array $credentials = []
     ) {
-        $memcached = $this->getMemcached($persistentConnectionId);
+        $memcached = $this->getMemcached(
+            $connectionId, $credentials, $options
+        );
 
-        if (count($customOptions)) {
-            $memcached->setOptions($this->validateCustomOptions($customOptions));
-        }
-
-        // Set SASL auth data.
-        if (count($saslCredentials) == 2) {
-            list($username, $password) = $saslCredentials;
-            $memcached->setOption(Memcached::OPT_BINARY_PROTOCOL, true);
-            $memcached->setSaslAuthData($username, $password);
-        }
-
-        // Add servers if necessary. When using a persistent connection servers
-        // must only be added once otherwise connections are duplicated.
         if (! $memcached->getServerList()) {
+            // For each server in the array, we'll just extract the configuration and add
+            // the server to the Memcached connection. Once we have added all of these
+            // servers we'll verify the connection is successful and return it back.
             foreach ($servers as $server) {
                 $memcached->addServer(
                     $server['host'], $server['port'], $server['weight']
@@ -48,59 +38,77 @@ class MemcachedConnector
             }
         }
 
-        $memcachedStatus = $memcached->getVersion();
+        return $this->validateConnection($memcached);
+    }
 
-        if (! is_array($memcachedStatus)) {
-            throw new RuntimeException('No Memcached servers added.');
+    /**
+     * Get a new Memcached instance.
+     *
+     * @param  string|null  $connectionId
+     * @param  array  $credentials
+     * @param  array  $options
+     * @return \Memcached
+     */
+    protected function getMemcached($connectionId, array $credentials, array $options)
+    {
+        $memcached = $this->createMemcachedInstance($connectionId);
+
+        if (count($credentials) == 2) {
+            $this->setCredentials($memcached, $credentials);
         }
 
-        if (in_array('255.255.255', $memcachedStatus) && count(array_unique($memcachedStatus)) === 1) {
-            throw new RuntimeException('Could not establish Memcached connection.');
+        if (count($options)) {
+            $memcached->setOptions($options);
         }
 
         return $memcached;
     }
 
     /**
-     * Get a new Memcached instance.
+     * Create the Memcached instance.
      *
-     * @param string|null $persistentConnectionId
-     *
+     * @param  string|null  $connectionId
      * @return \Memcached
      */
-    protected function getMemcached($persistentConnectionId)
+    protected function createMemcachedInstance($connectionId)
     {
-        if (is_string($persistentConnectionId) && strlen($persistentConnectionId)) {
-            return new Memcached($persistentConnectionId);
-        }
-
-        return new Memcached();
+        return empty($connectionId) ? new Memcached : new Memcached($connectionId);
     }
 
     /**
-     * Validates memcached custom options and resolves them in to
-     * Memcached constants for use by Memcached::setOptions().
+     * Set the SASL credentials on the Memcached connection.
      *
-     * @param array $customOptions
-     *
-     * @throws \RuntimeException
-     *
-     * @return mixed
+     * @param  \Memcached  $memcached
+     * @param  array  $credentials
+     * @return void
      */
-    protected function validateCustomOptions(array $customOptions)
+    protected function setCredentials($memcached, $credentials)
     {
-        $memcachedConstants = array_map(
-            function ($option) {
-                $constant = "Memcached::{$option}";
-                if (! defined($constant)) {
-                    throw new RuntimeException("Invalid Memcached option: [{$constant}]");
-                }
+        list($username, $password) = $credentials;
 
-                return constant($constant);
-            },
-            array_keys($customOptions)
-        );
+        $memcached->setOption(Memcached::OPT_BINARY_PROTOCOL, true);
 
-        return array_combine($memcachedConstants, $customOptions);
+        $memcached->setSaslAuthData($username, $password);
+    }
+
+    /**
+     * Validate the given Memcached connection.
+     *
+     * @param  \Memcached  $memcached
+     * @return \Memcached
+     */
+    protected function validateConnection($memcached)
+    {
+        $status = $memcached->getVersion();
+
+        if (! is_array($status)) {
+            throw new RuntimeException('No Memcached servers added.');
+        }
+
+        if (in_array('255.255.255', $status) && count(array_unique($status)) === 1) {
+            throw new RuntimeException('Could not establish Memcached connection.');
+        }
+
+        return $memcached;
     }
 }
