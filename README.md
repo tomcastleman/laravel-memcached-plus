@@ -3,6 +3,7 @@
 [![Build Status](https://travis-ci.org/b3it/laravel-memcached-plus.svg?branch=master)](https://travis-ci.org/b3it/laravel-memcached-plus)
 [![Total Downloads](https://poser.pugx.org/b3it/laravel-memcached-plus/downloads)](https://packagist.org/packages/b3it/laravel-memcached-plus)
 [![Latest Stable Version](https://poser.pugx.org/b3it/laravel-memcached-plus/v/stable)](https://packagist.org/packages/b3it/laravel-memcached-plus)
+[![Latest Unstable Version](https://poser.pugx.org/b3it/laravel-memcached-plus/v/unstable.svg)](https://packagist.org/packages/b3it/laravel-memcached-plus)
 [![License](https://poser.pugx.org/b3it/laravel-memcached-plus/license)](https://packagist.org/packages/b3it/laravel-memcached-plus)
 
 ## Summary
