@@ -161,6 +161,12 @@ you can paste into your session configuration file:
 
 ```
 
+To use the previous memcached 'plus' store example with sessions you would set this as follows:
+
+```
+    'store' => 'memcachedstorefoo',
+```
+
 ## laravel-memcached-plus in action
 
 I created a [demo app](https://github.com/b3it/laravel-memcached-plus-demo) for you to see
