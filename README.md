@@ -22,7 +22,7 @@ Optionally, this package also allows these extra configuration items to be used 
 Sessions.
 
 Read on for detailed instructions - you may find it useful to reference the
-[demo app](https://github.com/b3it/laravel-memcached-plus-app) at the same time.
+[demo app](https://github.com/b3it/laravel-memcached-plus-demo) at the same time.
 
 __Update__: [see here](#user-content-integration-with-laravelframework) for details on the PRs I submitted to laravel/framework.
 
@@ -166,7 +166,7 @@ you can paste into your session configuration file:
 
 ## laravel-memcached-plus in action
 
-I created a [demo app](https://github.com/b3it/laravel-memcached-plus-app) for you to see
+I created a [demo app](https://github.com/b3it/laravel-memcached-plus-demo) for you to see
 how this package integrates with Laravel 5 and how you could run it on Heroku.
 
 
