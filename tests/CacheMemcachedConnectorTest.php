@@ -15,7 +15,7 @@ class CacheMemcachedConnectorTest extends PHPUnit_Framework_TestCase
 
         $connector = $this->connectorMock();
         $connector->expects($this->once())
-            ->method('getMemcached')
+            ->method('createMemcachedInstance')
             ->will($this->returnValue($memcached));
 
         $result = $this->connect($connector);
@@ -32,7 +32,7 @@ class CacheMemcachedConnectorTest extends PHPUnit_Framework_TestCase
 
         $connector = $this->connectorMock();
         $connector->expects($this->once())
-            ->method('getMemcached')
+            ->method('createMemcachedInstance')
             ->will($this->returnValue($memcached));
 
         $this->connect($connector);
@@ -46,7 +46,7 @@ class CacheMemcachedConnectorTest extends PHPUnit_Framework_TestCase
 
         $connector = $this->connectorMock();
         $connector->expects($this->once())
-            ->method('getMemcached')
+            ->method('createMemcachedInstance')
             ->with($persistentConnectionId)
             ->will($this->returnValue($memcached));
 
@@ -68,33 +68,12 @@ class CacheMemcachedConnectorTest extends PHPUnit_Framework_TestCase
 
         $connector = $this->connectorMock();
         $connector->expects($this->once())
-            ->method('getMemcached')
+            ->method('createMemcachedInstance')
             ->will($this->returnValue($memcached));
 
         $result = $this->connect($connector, false, $validOptions);
 
         $this->assertSame($result, $memcached);
-    }
-
-    /**
-     * @expectedException RuntimeException
-     */
-    public function testExceptionThrownWithInvalidOptions()
-    {
-        if (! class_exists('Memcached')) {
-            $this->markTestSkipped('Memcached module not installed');
-        }
-
-        $invalidOptions = ['OPT_NO_BLOC' => true, 'OPT_CONNECT_TIMEOUT' => 2000];
-
-        $memcached = m::mock('stdClass');
-
-        $connector = $this->connectorMock();
-        $connector->expects($this->once())
-            ->method('getMemcached')
-            ->will($this->returnValue($memcached));
-
-        $this->connect($connector, false, $invalidOptions);
     }
 
     public function testServersAreAddedCorrectlyWithSaslCredentials()
@@ -112,7 +91,7 @@ class CacheMemcachedConnectorTest extends PHPUnit_Framework_TestCase
             ->andReturn(true);
 
         $connector = $this->connectorMock();
-        $connector->expects($this->once())->method('getMemcached')->will($this->returnValue($memcached));
+        $connector->expects($this->once())->method('createMemcachedInstance')->will($this->returnValue($memcached));
 
         $result = $this->connect($connector, false, [], $saslCredentials);
 
@@ -131,7 +110,7 @@ class CacheMemcachedConnectorTest extends PHPUnit_Framework_TestCase
 
     protected function connectorMock()
     {
-        return $this->getMock('B3IT\MemcachedPlus\MemcachedConnector', ['getMemcached']);
+        return $this->getMockBuilder('B3IT\MemcachedPlus\MemcachedConnector')->setMethods(['createMemcachedInstance'])->getMock();
     }
 
     protected function connect(
