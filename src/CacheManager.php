@@ -19,7 +19,7 @@ class CacheManager extends IlluminateCacheManager
         $prefix = $this->getPrefix($config);
 
         // Extract Plus features from config
-        $persistentConnectionId = array_get($config, 'persistent_id', false);
+        $persistentConnectionId = array_get($config, 'persistent_id');
         $customOptions = array_get($config, 'options', []);
         $saslCredentials = array_filter(array_get($config, 'sasl', []));
 

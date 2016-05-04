@@ -8,9 +8,11 @@
 
 ## Summary
 
+_This package is useful for Laravel 5.0 - 5.2. From 5.3 onwards two PRs I submitted to `laravel/framework` have been merged, therefore the features of this package are available out-the-box with Laravel 5.3 onwards._
+
 Integrating with cloud memcached services such as [MemCachier](https://www.memcachier.com/) and
 [memcached cloud](https://redislabs.com/memcached-cloud) can require memcached features not available
-with the built-in [Laravel 5 Cache](http://laravel.com/docs/5.0/cache) memcached driver.
+with the built-in [Laravel Cache](http://laravel.com/docs/5.2/cache) memcached driver from version 5.0 to 5.2.
 
 These include:
 
@@ -23,9 +25,7 @@ Optionally, this package also allows these extra configuration items to be used 
 Sessions.
 
 Read on for detailed instructions - you may find it useful to reference the
-[demo app](https://github.com/b3it/laravel-memcached-plus-app) at the same time.
-
-__Update__: [see here](#user-content-integration-with-laravelframework) for details on the PRs I submitted to laravel/framework.
+[demo app](https://github.com/b3it/laravel-memcached-plus-demo) at the same time.
 
 ## Requirements
 
@@ -83,7 +83,7 @@ Service Providers from this package:
 
 The `B3IT\MemcachedPlus\SessionServiceProvider` is optional. You only need to add this if:
 
-* You want to specify the memcached store to use for sessions, or
+* You want to specify a non-default memcached store to use for sessions, default is "memcached", or
 * You want to use the memcached features provided by this package for sessions
 
 ### Cache
@@ -109,11 +109,11 @@ These may be used in a store config like so:
             env('MEMCACHIER_PASSWORD')
         ],
         'options'    => [
-            'OPT_NO_BLOCK'         => true,
-            'OPT_AUTO_EJECT_HOSTS' => true,
-            'OPT_CONNECT_TIMEOUT'  => 2000,
-            'OPT_POLL_TIMEOUT'     => 2000,
-            'OPT_RETRY_TIMEOUT'    => 2,
+            Memcached::OPT_NO_BLOCK         => true,
+            Memcached::OPT_AUTO_EJECT_HOSTS => true,
+            Memcached::OPT_CONNECT_TIMEOUT  => 2000,
+            Memcached::OPT_POLL_TIMEOUT     => 2000,
+            Memcached::OPT_RETRY_TIMEOUT    => 2,
         ],
         'servers' => [
             [
@@ -123,11 +123,6 @@ These may be used in a store config like so:
     ],
 ],
 ```
-
-When defining `options` you should set the config key to the `Memcached` constant name as a string.
-This avoids any issues with local environments missing ext-memcached and throwing a warning about
-undefined constants. The `options` config keys are automatically resolved into `Memcached` constants by the
-`MemcachedPlus\MemcachedConnector` which throws a `RuntimeException` if the constant is invalid.
 
 Note that as this package _enhances_ the built-in Laravel 5 memcached Cache driver, the driver string
 remains `memcached`.
@@ -146,7 +141,7 @@ This section discusses the Laravel session configuration file `config/session.ph
 If you are using memcached sessions you will have set the `driver` configuration item to 'memcached'.
 
 If you have added the `B3IT\MemcachedPlus\SessionServiceProvider` as discussed above, the
-`memcached_store` configuration item is available. This is explained in the following new snippet
+`store` configuration item is available. This is explained in the following new snippet
 you can paste into your session configuration file:
 
 ```
@@ -155,30 +150,27 @@ you can paste into your session configuration file:
     | Session Cache Store
     |--------------------------------------------------------------------------
     |
-    | When using the "memcached" session driver, you may specify a cache store
-    | that should be used for these sessions. This should correspond to a
-    | store in your cache configuration options which uses the memcached
-    | driver.
+    | When using the "apc" or "memcached" session drivers, you may specify a
+    | cache store that should be used for these sessions. This value must
+    | correspond with one of the application's configured cache stores.
     |
     */
 
-    'memcached_store' => 'memcachier',
+    'store' => null,
+
+```
+
+To use the previous memcached 'plus' store example with sessions you would set this as follows:
+
+```
+    'store' => 'memcachedstorefoo',
 ```
 
 ## laravel-memcached-plus in action
 
-I created a [demo app](https://github.com/b3it/laravel-memcached-plus-app) for you to see
+I created a [demo app](https://github.com/b3it/laravel-memcached-plus-demo) for you to see
 how this package integrates with Laravel 5 and how you could run it on Heroku.
 
-
-## Integration with laravel/framework
-
-I submitted 2 PRs to [laravel/framework](https://github.com/laravel/framework) to natively integrate the functonality of this package in v5.0:
-
-* Memcached persistent connections, SASL authentication and custom options: [#7987](https://github.com/laravel/framework/pull/7987) and
-* Memcached Session store configuration [#7988](https://github.com/laravel/framework/pull/7988)
-
-The PRs weren't accepted at the time due to lack of tests in the initial version. As at Jan 2016 [tests](https://github.com/b3it/laravel-memcached-plus/blob/f259b39985e01ea75d6c5e1b3b633f8d9252ee17/tests/CacheMemcachedConnectorTest.php) have been added and I plan to submit PRs to the framework in due course.
 
 ## Support
 
