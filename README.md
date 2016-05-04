@@ -166,6 +166,13 @@ To use the previous memcached 'plus' store example with sessions you would set t
     'store' => 'memcachedstorefoo',
 ```
 
+## Breaking changes between v3 and v4
+
+The configuration of Memcached options has been updated to use the Memcached constants
+rather than the string constant name.
+
+The `session.memcached_store` variable has been renamed to `session.store`.
+
 ## laravel-memcached-plus in action
 
 I created a [demo app](https://github.com/b3it/laravel-memcached-plus-demo) for you to see
