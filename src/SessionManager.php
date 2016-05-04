@@ -15,7 +15,8 @@ class SessionManager extends IlluminateSessionManager
      */
     protected function createCacheHandler($driver)
     {
-        $store = array_get($this->app['config'], 'session.store') ?: $driver;
+        $store = $this->app['config']->get('session.store') ?: $driver;
+        
         $minutes = $this->app['config']['session.lifetime'];
 
         return new CacheBasedSessionHandler(clone $this->app['cache']->store($store), $minutes);
