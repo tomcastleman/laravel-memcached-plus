@@ -37,8 +37,10 @@ class MemcachedConnector
                 );
             }
         }
+        // some cloud memcached service don't return correct version, so skip version check.
+        $checkVersion = in_array("check_version",$options) ? $options["check_version"] : FALSE;
 
-        return $this->validateConnection($memcached);
+        return $this->validateConnection($memcached, $checkVersion);
     }
 
     /**
@@ -97,7 +99,7 @@ class MemcachedConnector
      * @param  \Memcached  $memcached
      * @return \Memcached
      */
-    protected function validateConnection($memcached)
+    protected function validateConnection($memcached, $checkVersion=TRUE)
     {
         $status = $memcached->getVersion();
 
@@ -105,7 +107,7 @@ class MemcachedConnector
             throw new RuntimeException('No Memcached servers added.');
         }
 
-        if (in_array('255.255.255', $status) && count(array_unique($status)) === 1) {
+        if ($checkVersion && in_array('255.255.255', $status) && count(array_unique($status)) === 1) {
             throw new RuntimeException('Could not establish Memcached connection.');
         }
 
