@@ -21,13 +21,15 @@ class CacheManager extends IlluminateCacheManager
         // Extract Plus features from config
         $persistentConnectionId = array_get($config, 'persistent_id');
         $customOptions = array_get($config, 'options', []);
+        $checkVersion = array_get($config, 'check_version', true);
         $saslCredentials = array_filter(array_get($config, 'sasl', []));
 
         $memcached = $this->app['memcached.connector']->connect(
             $config['servers'],
             $persistentConnectionId,
             $customOptions,
-            $saslCredentials
+            $saslCredentials,
+            $checkVersion
         );
 
         return $this->repository(new MemcachedStore($memcached, $prefix));

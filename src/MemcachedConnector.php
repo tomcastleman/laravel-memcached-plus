@@ -21,7 +21,8 @@ class MemcachedConnector
      */
     public function connect(
         array $servers, $connectionId = null,
-        array $options = [], array $credentials = []
+        array $options = [], array $credentials = [],
+        $checkVersion = true
     ) {
         $memcached = $this->getMemcached(
             $connectionId, $credentials, $options
@@ -37,8 +38,6 @@ class MemcachedConnector
                 );
             }
         }
-        // some cloud memcached service don't return correct version, so skip version check.
-        $checkVersion = in_array("check_version",$options) ? $options["check_version"] : FALSE;
 
         return $this->validateConnection($memcached, $checkVersion);
     }
@@ -99,7 +98,7 @@ class MemcachedConnector
      * @param  \Memcached  $memcached
      * @return \Memcached
      */
-    protected function validateConnection($memcached, $checkVersion=TRUE)
+    protected function validateConnection($memcached, $checkVersion=true)
     {
         $status = $memcached->getVersion();
 
