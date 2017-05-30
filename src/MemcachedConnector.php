@@ -21,7 +21,8 @@ class MemcachedConnector
      */
     public function connect(
         array $servers, $connectionId = null,
-        array $options = [], array $credentials = []
+        array $options = [], array $credentials = [],
+        $checkVersion = true
     ) {
         $memcached = $this->getMemcached(
             $connectionId, $credentials, $options
@@ -38,7 +39,7 @@ class MemcachedConnector
             }
         }
 
-        return $this->validateConnection($memcached);
+        return $this->validateConnection($memcached, $checkVersion);
     }
 
     /**
@@ -97,7 +98,7 @@ class MemcachedConnector
      * @param  \Memcached  $memcached
      * @return \Memcached
      */
-    protected function validateConnection($memcached)
+    protected function validateConnection($memcached, $checkVersion=true)
     {
         $status = $memcached->getVersion();
 
@@ -105,7 +106,7 @@ class MemcachedConnector
             throw new RuntimeException('No Memcached servers added.');
         }
 
-        if (in_array('255.255.255', $status) && count(array_unique($status)) === 1) {
+        if ($checkVersion && in_array('255.255.255', $status) && count(array_unique($status)) === 1) {
             throw new RuntimeException('Could not establish Memcached connection.');
         }
 
