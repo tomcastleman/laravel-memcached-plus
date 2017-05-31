@@ -2,8 +2,8 @@
 
 namespace B3IT\MemcachedPlus;
 
-use Illuminate\Cache\CacheManager as IlluminateCacheManager;
 use Illuminate\Cache\MemcachedStore;
+use Illuminate\Cache\CacheManager as IlluminateCacheManager;
 
 class CacheManager extends IlluminateCacheManager
 {
